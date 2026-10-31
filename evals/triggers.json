@@ -1,0 +1,11 @@
+{
+  "skill": "binary-precision",
+  "test_cases": [
+    {"input": "parse this binary file accurately", "should_trigger": true},
+    {"input": "write binary data with high reliability", "should_trigger": true},
+    {"input": "validate round-trip for my custom format", "should_trigger": true},
+    {"input": "hex dump this file and explain the fields", "should_trigger": true},
+    {"input": "optimize my Python code for speed", "should_trigger": false},
+    {"input": "create a web UI", "should_trigger": false}
+  ]
+}

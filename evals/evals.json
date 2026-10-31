@@ -1,0 +1,25 @@
+{
+  "skill": "binary-precision",
+  "test_cases": [
+    {
+      "name": "parse_simple_header",
+      "input": "Parse this binary file with a simple header containing magic and a 32-bit value",
+      "assertions": ["Uses binary_tool.py parse", "Defines Struct with Const and Int32ul", "Outputs structured fields"]
+    },
+    {
+      "name": "roundtrip_validation",
+      "input": "Verify that building then parsing this format produces identical results",
+      "assertions": ["Runs roundtrip command", "Confirms ROUND-TRIP OK or reports failure"]
+    },
+    {
+      "name": "hex_inspect",
+      "input": "Show me a hex dump of this binary so I can check the offsets",
+      "assertions": ["Uses binary_tool.py hex", "Produces offset-annotated hex dump"]
+    },
+    {
+      "name": "build_from_json",
+      "input": "Generate a binary file from this JSON object using the format definition",
+      "assertions": ["Uses build command", "Writes correct binary matching the Struct"]
+    }
+  ]
+}

@@ -40,6 +40,23 @@ binary-precision hex data.bin
 | `examples/wav_header.py` | WAV/RIFF header (sample rate, channels) |
 | `examples/sensor_soa.py` | Data-oriented sensor frame (SoA arrays) |
 
+## Niche Formats (`examples/niche/`)
+
+| File | What it covers |
+|------|----------------|
+| `ipv4_header.py` | IPv4 header with bitfields |
+| `zip_local.py` | ZIP local file header |
+| `dns_header.py` | DNS header with flag bitfields |
+| `versioned_protocol.py` | Versioned body via Switch |
+| `mbr_partition.py` | MBR partition table entry |
+| `telemetry.py` | IoT telemetry with bit-packed status |
+| `pcap_packet.py` | PCAP packet record header |
+| `mesh_header.py` | Simple mesh/asset header |
+| `columnar_log.py` | Data-oriented log record |
+| `auth_header.py` | Authenticated payload + MAC |
+| `gif_header.py` | GIF logical screen descriptor |
+| `can_frame.py` | CAN-like embedded frame |
+
 ## Features
 
 - Declarative formats (Construct)

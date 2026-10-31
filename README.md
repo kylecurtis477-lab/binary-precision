@@ -56,6 +56,13 @@ binary-precision hex data.bin
 | `auth_header.py` | Authenticated payload + MAC |
 | `gif_header.py` | GIF logical screen descriptor |
 | `can_frame.py` | CAN-like embedded frame |
+| `tcp_header.py` | TCP header with flag bitfields |
+| `jpeg_app0.py` | JPEG SOI + JFIF APP0 |
+| `gpt_header.py` | GPT (EFI) partition header |
+| `modbus_rtu.py` | Modbus RTU frame |
+| `pe_optional.py` | PE optional header start |
+| `timeseries.py` | Fixed-stride time-series record |
+| `dhcp_option.py` | DHCP option (code + length) |
 
 ## Features
 

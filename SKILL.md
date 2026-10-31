@@ -31,43 +31,31 @@ Parse and generate binary data with near-100% fidelity using Construct. Focus on
 4. **Inspect when needed**  
    Hex dump with offsets to correlate failures.
 
-## Using the Tool
+## Using the Package
 
-Script location: `scripts/binary_tool.py` (requires `construct` — `pip install construct`).
+After `pip install -e .`:
 
-### Parse a file
 ```bash
-python3 scripts/binary_tool.py parse data.bin \
-  --format-code 'fmt = Struct("magic" / Const(b"TEST"), "value" / Int32ul)' \
-  --json
+binary-precision roundtrip --format-file examples/demo_format.py --json-input '{"magic":"DEMO","count":5,"payload":"hello"}'
+binary-precision parse data.bin --format-file examples/packet_with_crc.py --json
 ```
 
-### Build from JSON
-```bash
-python3 scripts/binary_tool.py build out.bin \
-  --format-code 'fmt = Struct("magic" / Const(b"TEST"), "value" / Int32ul)' \
-  --json-input '{"magic": "TEST", "value": 42}'
-```
+Python API:
 
-### Round-trip test
-```bash
-python3 scripts/binary_tool.py roundtrip \
-  --format-code 'fmt = Struct("magic" / Const(b"TEST"), "value" / Int32ul)' \
-  --json-input '{"magic": "TEST", "value": 42}'
-```
-
-### Hex dump
-```bash
-python3 scripts/binary_tool.py hex data.bin
+```python
+from binary_precision import load_format, parse, build, round_trip
+fmt = load_format("examples/demo_format.py")
+assert round_trip(fmt, {"magic": "DEMO", "count": 5, "payload": "hello"})
 ```
 
 ## Production Notes
 
-- Prefer `--format-file` over inline `--format-code` for reusable, reviewable definitions.
-- Always run `roundtrip` on real and edge-case data before trusting a format.
-- Once validated, call `fmt.compile()` for faster parse/build in hot paths (Construct 2.10+).
-- Do not parse untrusted input without explicit size limits, checksums, and validation.
-- For complex types (nested, floats, custom adapters), supply Python objects rather than pure JSON when building.
+- Prefer `--format-file` / `load_format(path)` for reusable definitions.
+- Always run round-trip on real and edge-case data.
+- Add magic, length, and checksums.
+- Use size limits for untrusted input.
+- After validation, consider `fmt.compile()` for speed.
+- See `references/` for patterns and data-oriented layouts.
 
 ## Resources
 

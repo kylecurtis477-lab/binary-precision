@@ -1,36 +1,56 @@
 # binary-precision
 
-High-accuracy declarative binary read/write skill and toolkit using [Construct](https://construct.readthedocs.io/).
+**High-accuracy declarative binary I/O.**  
+Define formats once with Construct, get reliable parse/build, round-trip guarantees, and production-grade error reporting.
 
-Designed for production use: validation, round-trip guarantees, explicit endianness, checksums, and data-oriented layout guidance. Target 99%+ accuracy on specified formats.
+Target: 99%+ accuracy on specified formats. Ideal for protocols, file headers, embedded data, and data-oriented layouts.
+
+## Install
+
+```bash
+pip install -e .
+# or
+pip install construct && python -m binary_precision.cli ...
+```
 
 ## Quick Start
 
 ```bash
-pip install -r requirements.txt
-```
+# Round-trip a format
+binary-precision roundtrip \
+  --format-file examples/demo_format.py \
+  --json-input '{"magic":"DEMO","count":5,"payload":"hello"}'
 
-```bash
 # Parse
-python3 scripts/binary_tool.py parse data.bin --format-file examples/demo_format.py --json
+binary-precision parse data.bin --format-file examples/packet_with_crc.py --json
 
-# Round-trip test
-python3 scripts/binary_tool.py roundtrip --format-file examples/demo_format.py --json-input '{"magic":"DEMO","count":5,"payload":"hello"}'
+# Hex dump
+binary-precision hex data.bin
 ```
 
-## Skill Usage
+## Features
 
-This is structured as a Grok skill. See `SKILL.md` for the full workflow.
+- Declarative formats (Construct)
+- Path-aware error messages
+- Round-trip validation
+- `--format-file` for reusable definitions
+- Checksum / magic / version patterns
+- Data-oriented layout guidance (AoS vs SoA)
+- Installable CLI + Python API
+- CI tested
 
-- `scripts/binary_tool.py` — CLI
-- `references/` — patterns and data-oriented advice
-- `examples/` — sample formats
+## Skill
 
-## Production Notes
+This repo is also a Grok skill. See `SKILL.md`.
 
-- Always validate with round-trip on real data.
-- Prefer `--format-file` for reusable definitions.
-- Add magic, checksums, and size limits for untrusted input.
-- Use `fmt.compile()` after validation for speed.
+## Production Checklist
 
-MIT License.
+1. Define format in a `.py` file.
+2. Add magic, length, checksum.
+3. Run `roundtrip` on real + edge data.
+4. Add size limits for untrusted input.
+5. (Optional) `fmt.compile()` after validation for speed.
+
+## License
+
+MIT

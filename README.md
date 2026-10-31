@@ -28,6 +28,18 @@ binary-precision parse data.bin --format-file examples/packet_with_crc.py --json
 binary-precision hex data.bin
 ```
 
+## Examples
+
+| File | What it covers |
+|------|----------------|
+| `examples/demo_format.py` | Basic magic + length-prefixed payload |
+| `examples/packet_with_crc.py` | Magic + length + CRC32 |
+| `examples/png_ihdr.py` | PNG signature + IHDR (width/height) |
+| `examples/bmp_header.py` | BMP file + info header |
+| `examples/elf_ident.py` | ELF identification (class, endianness) |
+| `examples/wav_header.py` | WAV/RIFF header (sample rate, channels) |
+| `examples/sensor_soa.py` | Data-oriented sensor frame (SoA arrays) |
+
 ## Features
 
 - Declarative formats (Construct)
